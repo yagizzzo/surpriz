@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bir Sürpriz 💛</title>
+  <style>
+    :root{
+      --bg1:#0b0b12;
+      --bg2:#121226;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --txt: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#ffd36a;
+      --accent2:#b57cff;
+      --good:#6ef0b1;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --r: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--txt);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 800px at 20% 0%, rgba(181,124,255,.18), transparent 60%),
+        radial-gradient(900px 700px at 90% 10%, rgba(255,211,106,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px}
+    .hero{
+      position:relative;
+      padding:28px 18px;
+      border:1px solid var(--stroke);
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .glow{
+      position:absolute; inset:-120px -120px auto auto;
+      width:340px;height:340px;border-radius:50%;
+      background:radial-gradient(circle, rgba(255,211,106,.35), transparent 62%);
+      filter: blur(2px);
+      pointer-events:none;
+    }
+    h1{margin:0 0 8px;font-size:30px;letter-spacing:.2px}
+    .sub{margin:0;color:var(--muted);line-height:1.55}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
+    .card{
+      border:1px solid var(--stroke);
+      background:var(--card);
+      border-radius:var(--r);
+      padding:16px;
+      box-shadow: 0 12px 45px rgba(0,0,0,.28);
+    }
+    .card h2{margin:0 0 10px;font-size:18px}
+    .muted{color:var(--muted)}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    button, a.btn{
+      appearance:none;border:1px solid var(--stroke);
+      background:rgba(255,255,255,.06);
+      color:var(--txt);
+      padding:10px 12px;border-radius:14px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-weight:600;
+      text-decoration:none;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    button:hover, a.btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.09)}
+    .primary{
+      border-color: rgba(255,211,106,.45);
+      background: linear-gradient(180deg, rgba(255,211,106,.18), rgba(255,255,255,.06));
+    }
+    .primary:hover{border-color: rgba(255,211,106,.70)}
+    .tiny{font-size:12px;color:var(--muted);margin-top:10px}
+    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .item{
+      padding:12px;border-radius:16px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.16);
+    }
+    .item strong{color:var(--accent)}
+    .quote{
+      margin:10px 0 0;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.20);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      line-height:1.6;
+    }
+    .footer{
+      margin-top:16px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      color:var(--muted);font-size:12px
+    }
+    /* confetti hearts */
+    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+    .heart{
+      position:absolute;
+      font-size:18px;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.5));
+      opacity:.95;
+    }
+    @keyframes floatUp{
+      from{ transform: translateY(30px) scale(.9); opacity:0 }
+      10%{opacity:1}
+      to{ transform: translateY(-120vh) scale(1.4); opacity:0 }
+    }
+    /* modal */
+    dialog{
+      width:min(560px, 92vw);
+      border:none;
+      border-radius:22px;
+      padding:0;
+      background: rgba(18,18,38,.92);
+      color:var(--txt);
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+    }
+    dialog::backdrop{background: rgba(0,0,0,.55)}
+    .modal{
+      padding:16px 16px 14px;
+    }
+    .modal h3{margin:0 0 8px;font-size:18px}
+    .modal p{margin:0;color:var(--muted);line-height:1.6}
+    .modal .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .kbd{
+      display:inline-flex;align-items:center;
+      padding:6px 10px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      font-weight:700;
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="glow"></div>
+      <h1>Hey <span id="name">Aşkım</span> 💛</h1>
+      <p class="sub">
+        Bugün biraz tatsız oldu… ama ben seni kaybetmek istemiyorum.
+        
+      </p>
+      <div class="chips">
+        <span class="chip">✨ Mini sürpriz</span>
+        <span class="chip">🫶 Özür + sevgi</span>
+        <span class="chip">🎁 Kuponlar</span>
+        <span class="chip">💌 Küçük not</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Benim mesajım</h2>
+          <p class="muted" style="margin:0;line-height:1.7">
+            Ben bazen anlatmayı beceremiyorum ama niyetim hep aynı:
+            <b>yanında olmak</b>.
+            Eğer seni kırdıysam gerçekten özür dilerim.
+            Gel, sakin bir şekilde konuşalım.
+          </p>
+
+          <div class="quote" id="quote">
+            “Seninle her şey daha kolay. Kötü gün bile, seninle ‘biz’ olunca düzeliyor.”
+          </div>
+
+          <div class="btns">
+            <button class="primary" id="btnHearts">Kalpleri patlat 💥💛</button>
+            <button id="btnModal">Sana bir şeyim var…</button>
+            <a class="btn" id="btnMusic" target="_blank" rel="noopener">🎧 Bir şarkı aç</a>
+          </div>
+
+          <div class="tiny">
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Bugün için 3 küçük söz</h2>
+          <ul class="list">
+            <li class="item">1) <strong>Dinleyeceğim.</strong> Savunmaya geçmeden.</li>
+            <li class="item">2) <strong>Telafi edeceğim.</strong> Sadece “özür” değil, davranış.</li>
+            <li class="item">3) <strong>Biz olacağım.</strong> Sorunu değil, çözümü büyüteceğim.</li>
+          </ul>
+
+          <h2 style="margin-top:14px">Kuponlar 🎫</h2>
+          <ul class="list">
+            <li class="item">🍰 Tatlı ısmarlama kuponu (Sınırsız bahane yok)</li>
+            <li class="item">☕ Kafe buluşması (Sen seçiyorsun)</li>
+            <li class="item">🎬 Film gecesi (Telefonlar sessizde)</li>
+            <li class="item">🧸 “Sarılma + konuşma” (İstediğin kadar)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>🗓️ <span id="date"></span></span>
+        <span>Hazırlayan: <span id="me">Ben</span> • “Seni seviyorum.”</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <dialog id="modal">
+    <div class="modal">
+      <h3>Şunu bil…</h3>
+      <p>
+        Seni sevdiğim için “haklı çıkmak” istemiyorum.
+        <b>Birlikte iyi olalım</b> istiyorum.
+        Eğer istersen bugün sadece şunu yapalım:
+      </p>
+      <div class="row" style="margin-top:12px">
+        <span class="kbd">10 dk</span>
+        <span class="kbd">Sakin</span>
+        <span class="kbd">Su/çay</span>
+        <span class="kbd">Sadece dinleme</span>
+      </div>
+      <div class="btns" style="margin-top:14px">
+        <button class="primary" id="btnOk">Tamam 💛</button>
+        <button id="btnClose">Kapat</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // ---- KOLAY DÜZENLEME ALANI ----
+    const CONFIG = {
+      sevgiliIsmi: "Sevgilim",     // burayı değiştir
+      benimIsmim: "Yağız",      // burayı değiştir (istersen boş bırak)
+      sarkiLinki: "https://www.youtube.com/watch?v=-PSdo6mfgwQ&list=RD-PSdo6mfgwQ&start_radio=1", // bir şarkı linki koy
+      soz: "“Seninle her şey daha kolay. Kötü gün bile, seninle ‘biz’ olunca düzeliyor.”"
+    };
+
+    // ---- Sayfaya bas ----
+    document.getElementById("name").textContent = CONFIG.sevgiliIsmi || "Aşkım";
+    document.getElementById("me").textContent = CONFIG.benimIsmim || "Ben";
+    document.getElementById("quote").textContent = CONFIG.soz;
+    const d = new Date();
+    document.getElementById("date").textContent =
+      d.toLocaleDateString("tr-TR", { day:"2-digit", month:"long", year:"numeric" });
+
+    const btnMusic = document.getElementById("btnMusic");
+    btnMusic.href = CONFIG.sarkiLinki;
+
+    // ---- Kalp efekti ----
+    const heartsLayer = document.getElementById("hearts");
+    const HEARTS = ["💛","💜","🖤","💫","✨","🫶","💖"];
+    function spawnHeart(){
+      const el = document.createElement("div");
+      el.className = "heart";
+      el.textContent = HEARTS[Math.floor(Math.random()*HEARTS.length)];
+      el.style.left = Math.random()*100 + "vw";
+      el.style.bottom = "-10px";
+      el.style.fontSize = (14 + Math.random()*18) + "px";
+      el.style.animationDuration = (2.6 + Math.random()*2.6) + "s";
+      el.style.opacity = (0.75 + Math.random()*0.25);
+      heartsLayer.appendChild(el);
+      setTimeout(()=> el.remove(), 5200);
+    }
+
+    let burstTimer = null;
+    document.getElementById("btnHearts").addEventListener("click", ()=>{
+      if (burstTimer) return;
+      let count = 0;
+      burstTimer = setInterval(()=>{
+        spawnHeart(); spawnHeart();
+        count += 2;
+        if (count >= 40){
+          clearInterval(burstTimer);
+          burstTimer = null;
+        }
+      }, 90);
+    });
+
+    // ---- Modal ----
+    const modal = document.getElementById("modal");
+    document.getElementById("btnModal").addEventListener("click", ()=> modal.showModal());
+    document.getElementById("btnClose").addEventListener("click", ()=> modal.close());
+    document.getElementById("btnOk").addEventListener("click", ()=>{
+      modal.close();
+      // minik ekstra efekt:
+      for(let i=0;i<18;i++) setTimeout(spawnHeart, i*60);
+    });
+  </script>
+</body>
+</html>
